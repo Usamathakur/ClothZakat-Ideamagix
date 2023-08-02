@@ -8,6 +8,7 @@ import { Pressable, Text } from 'react-native'
 import {FontAwesome5} from '@expo/vector-icons'
 import { useSelector } from 'react-redux'
 import { selectNumberOfItems } from './store/cartSlice'
+import Checkout from './screens/Checkout'
 const Stack = createNativeStackNavigator();
 const navigation = () => {
   const numberOfItems = useSelector(selectNumberOfItems);
@@ -25,6 +26,7 @@ const navigation = () => {
             <Stack.Screen name='Product Details' component={ProductDetailScreen}
             options={{presentation:'modal'}}/>
             <Stack.Screen name='Cart' component={ShoppingCart}/>
+            <Stack.Screen name='Checkout' component={Checkout}/>
         </Stack.Navigator>
     </NavigationContainer>
   )

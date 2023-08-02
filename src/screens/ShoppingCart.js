@@ -2,10 +2,10 @@ import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
 import CartListItem from '../components/CardListItem';
 import { useSelector } from 'react-redux';
-
+import { useNavigation } from '@react-navigation/native';
 const ShoppingCart = () => {
   const cartItems = useSelector((state) => state.cart.items);
-
+  const navigation = useNavigation();
   // Calculate the subtotal of the items in the cart
   const calculateSubtotal = () => {
     return cartItems.reduce((total, cartItem) => {
@@ -49,9 +49,20 @@ const ShoppingCart = () => {
           </View>
         )}
       />
-      <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>Buy Now</Text>
-      </Pressable>
+      <Pressable
+  style={styles.button}
+  onPress={() => navigation.navigate('Checkout', {
+    cartItems,
+    subtotal,
+    deliveryFee,
+    totalAmount,
+  })}
+  android_ripple={{ color: 'darkgreen' }}
+>
+  <Text style={styles.buttonText}>Buy Now</Text>
+</Pressable>
+
+      <Text style={{padding:20,color:'red'}}>Orders Above 200 have no delivery fee</Text>
     </View>
   );
 };
